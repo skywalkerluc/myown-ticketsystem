@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myown-ticketsytem-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myown-ticketsytem
+  template:
+    metadata:
+      labels:
+        app: myown-ticketsytem
+    spec:
+      containers:
+        - name: myown-ticketsytem-container
+          image: myown-ticketsytem-app
+          ports:
+            - containerPort: 3000
