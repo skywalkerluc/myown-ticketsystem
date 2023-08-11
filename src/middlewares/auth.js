@@ -18,9 +18,7 @@ function admin(req, res, next) {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   if (decoded.role !== "admin") {
-    return res
-      .status(403)
-      .json({ message: "Acesso negado: apenas administradores" });
+    return res.status(403).json({ message: "Denied: admin only allowed" });
   }
 
   req.userData = decoded;

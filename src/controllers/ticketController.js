@@ -14,16 +14,14 @@ const purchaseTicket = async (req, res) => {
     const event = await Event.findById(eventId);
 
     if (!event) {
-      throw new Error("Evento não encontrado");
+      throw new Error("Event not found");
     }
 
     const userId = req.userData.userId;
     const { quantity, cardInfo } = req.body;
 
     if (event.ticketsAvailable < quantity) {
-      return res
-        .status(400)
-        .json({ message: "Ingressos indisponíveis na quantidade solicitada." });
+      return res.status(400).json({ message: "Quantity not available" });
     }
 
     const ticketPrice = event.ticketPrice;
@@ -52,9 +50,7 @@ const purchaseTicket = async (req, res) => {
     await event.save({ session });
 
     await session.commitTransaction();
-    res
-      .status(200)
-      .json({ message: "Ingressos comprados com sucesso!", order });
+    res.status(200).json({ message: "Tickets bought successfully", order });
   } catch (error) {
     await session.abortTransaction();
     logger.error(error);
@@ -70,7 +66,7 @@ const checkAvailability = async (req, res) => {
   if (event) {
     res.json({ ticketsAvailable: event.ticketsAvailable });
   } else {
-    res.status(404).json({ message: "Evento não encontrado." });
+    res.status(404).json({ message: "Event not found" });
   }
 };
 

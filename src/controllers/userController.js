@@ -19,7 +19,7 @@ const register = async (req, res, next) => {
     });
     await user.save();
 
-    res.status(201).json({ message: "Usuário registrado com sucesso!", user });
+    res.status(201).json({ message: "User registered successfully", user });
   } catch (error) {
     next(error);
   }
@@ -30,8 +30,8 @@ const getAll = async (req, res) => {
     const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
-    logger.error("Erro ao buscar usuários:", error);
-    res.status(500).json({ message: "Erro interno" });
+    logger.error("Error fetching users: ", error);
+    res.status(500).json({ message: "Internal error" });
   }
 };
 

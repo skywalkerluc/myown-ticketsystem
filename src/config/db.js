@@ -9,15 +9,15 @@ const connectDB = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then(() => console.log("Conectado ao banco de dados"))
+    .then(() => console.log("Connected"))
     .catch((err) => {
-      console.error("Erro ao conectar ao banco de dados", err);
+      console.error("Error trying to connect to database", err);
       connectionAttempts++;
       if (connectionAttempts < 5) {
-        logger.info("Tentando reconectar...");
-        setTimeout(connectDB, 5000); // Tenta reconectar em 5 segundos
+        logger.info("Retrying connection...");
+        setTimeout(connectDB, 5000);
       } else {
-        logger.error("Falha ao reconectar. Encerrando o aplicativo.");
+        logger.error("Connection failure. Exiting the app.");
         process.exit(1);
       }
     });

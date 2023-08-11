@@ -9,7 +9,7 @@ function callWithCircuitBreaker(fn, ...args) {
       logger.info(`Service out: ${Date.now()}`);
       return {
         success: false,
-        message: "Serviço indisponível - circuit breaker ativado",
+        message: "Service not available - circuit breaker activated",
       };
     }
     failureCount = 0;

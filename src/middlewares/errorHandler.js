@@ -5,10 +5,10 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({ message: err.message });
   }
   if (err.name === "UnauthorizedError") {
-    return res.status(401).json({ message: "Acesso não autorizado" });
+    return res.status(401).json({ message: "Not authorized" });
   }
   logger.error(err);
-  res.status(500).json({ message: "Erro interno" });
+  res.status(500).json({ message: "Internal error" });
 };
 
 module.exports = errorHandler;
